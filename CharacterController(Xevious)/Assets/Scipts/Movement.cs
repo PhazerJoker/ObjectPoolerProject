@@ -37,6 +37,15 @@ public class Movement : MonoBehaviour
     Debug.LogError("You are missing a Rigidbody!");
     if (moveSpeed == 0)
     Debug.LogError("You are missing a Movement Speed!");
+
+    if (Input.GetKeyDown("space")) {
+      Shoot();
+		}
+		float xDir = Input.GetAxis("Horizontal");
+		float yDir = Input.GetAxis("Vertical");
+		shipRB.velocity = new Vector2(xDir * moveSpeed, yDir * moveSpeed);
+		
+  
   }
   
   void Shoot()
