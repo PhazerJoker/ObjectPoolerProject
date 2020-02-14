@@ -12,12 +12,14 @@ namespace Meowie{
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(float))]
 
+
+
 public class Movement : MonoBehaviour
 {
   //One 2D rigidbody is needed to run this script
   [Tooltip("This is a 2D Rigidbody Variable, Add a 2D Rigid body here")]
   public Rigidbody2D shipRB;
-
+  public GameObject playerBullet;
   //The movement speed is set to a comfortable .2 but is able to be changed to feel in the Unity inspector
   [Tooltip("This variable controls the speed of the 2D Rigidbody, This variable can take any number (Tip: Dont go to crazy)")]
   public float moveSpeed = .2f;
@@ -36,7 +38,16 @@ public class Movement : MonoBehaviour
     if (moveSpeed == 0)
     Debug.LogError("You are missing a Movement Speed!");
   }
-
+  
+  void Shoot()
+  {
+    GameObject bullet = ObjectPooler.instance.GetPooledObject(); 
+  if (bullet != null) {
+    bullet.transform.position = shipRB.transform.position;
+    bullet.transform.rotation = shipRB.transform.rotation;
+    bullet.SetActive(true);
+  }
+  }
 
 
 }
