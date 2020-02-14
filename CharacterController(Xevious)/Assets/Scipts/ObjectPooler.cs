@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Meowie;
+
+
+    
 
 public class ObjectPooler : MonoBehaviour
 {
@@ -8,12 +12,12 @@ public class ObjectPooler : MonoBehaviour
     List<GameObject> pooledObjects;
     public GameObject objectToPool;
     public int amountToPool;
-    public bool canGrow;
+    public bool canGrow = true;
     void Awake()
     {
         instance = this;
     }
-    void Start()
+    void OnEnable()
     {
         pooledObjects = new List<GameObject>();
         for(int i = 0;i<amountToPool;i++){
@@ -26,7 +30,7 @@ public class ObjectPooler : MonoBehaviour
    
     public GameObject GetPooledObject()
     {
-        for(int i = 0;i < pooledObjects.Count;i++)
+        for(int i = 0; i < pooledObjects.Count; i++)
         {
             if(!pooledObjects[i].activeInHierarchy)
             {
@@ -37,10 +41,14 @@ public class ObjectPooler : MonoBehaviour
         if(canGrow)
         {
             GameObject tempObject = GameObject.Instantiate(objectToPool);
+            tempObject.SetActive(false);
             pooledObjects.Add(tempObject);
             return tempObject;
         }
-        
+
+        else
+        {
         return null;
+        }
     }
 }
