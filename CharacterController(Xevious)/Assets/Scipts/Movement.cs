@@ -38,16 +38,20 @@ public class Movement : MonoBehaviour
     if (moveSpeed == 0)
     Debug.LogError("You are missing a Movement Speed!");
 
+
+  //controls shoot input
     if (Input.GetKeyDown("space")) {
       Shoot();
 		}
 		float xDir = Input.GetAxis("Horizontal");
 		float yDir = Input.GetAxis("Vertical");
 		shipRB.velocity = new Vector2(xDir * moveSpeed, yDir * moveSpeed);
+    //shipRB.position = new Vector2(xDir.transform.position, yDir.transform.position);
+    
 		
   
   }
-  
+  // instantiates bullet, references pool
   void Shoot()
   {
     GameObject bullet = ObjectPooler.instance.GetPooledObject(); 
