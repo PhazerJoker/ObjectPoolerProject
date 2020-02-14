@@ -62,6 +62,20 @@ public class Movement : MonoBehaviour
   }
   }
 
+  private void OnTriggerEnter2D(Collider2D other) 
+  {
+    if (other.gameObject.tag == "ship")
+    {
+      if (gameObject.tag == "bullet")
+      {
+        gameObject.SetActive(false);
+      }
+      else 
+      {
+        Destroy(gameObject);
+      }
+    }
+  }
 
 }
 }
